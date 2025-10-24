@@ -7,7 +7,9 @@ import welcome from "./routes/welcome.js";
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://front-biblioteca-alpha.vercel.app/login',
+}));
 app.use(express.json());
 
 
