@@ -16,7 +16,7 @@ app.use(express.json());
  app.use('/api/livros',resources);
  app.use('/api',authRoutes);
  
-app.listen(PORT, () => {
+app.listen(PORT || 8000, () => {
     console.log(`Serviço rodando na porta ${PORT}`)
 });
 
