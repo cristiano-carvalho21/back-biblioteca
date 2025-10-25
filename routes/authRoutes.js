@@ -4,7 +4,7 @@ import { handleLogin, handleRegister} from '../controllers/authController.js';
 const router = express.Router();
 
 // Rota de cadastro
- router.post('/npm start', handleRegister);
+ router.post('/register', handleRegister);
 
  // Rota de login
   router.post('/login', handleLogin);
