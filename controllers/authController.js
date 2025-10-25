@@ -1,7 +1,7 @@
 import pool from "../db.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-
+import validator from "validator";
 
 const SECRET = process.env.SECRET;
 
@@ -11,6 +11,9 @@ export const handleRegister = async(req, res) => {
     const hashedPassword = await bcrypt.hash(password,10);
    
     try {
+        if(!validator.isEmail(email)){
+            return res.status(400).json({erro:'Email Inválido'});
+        }
         await pool.query('insert into usuarios(nome,email,senha) values($1,$2, $3)', [nome,email,hashedPassword]);
         res.status(201).send('Usuário Cadastrado');
     } catch (error) {

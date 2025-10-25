@@ -9,8 +9,8 @@ const PORT = process.env.PORT || 8000;
 
 app.use(cors({
     origin: 'https://front-biblioteca-alpha.vercel.app',
-    
 }));
+
 app.use(express.json());
 
 
