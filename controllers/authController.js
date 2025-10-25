@@ -22,6 +22,9 @@ export const handleRegister = async(req, res) => {
         if(!/\d/.test(usuario)){
             return res.status(400).json({erro:'O email deve conter pelo menos um número'});
         }
+        if(usuario.includes('gmail')){
+            return res.status(400).json({erro:'O termo gmail só deve estar depois do arroba'});
+        }
         await pool.query('insert into usuarios(nome,email,senha) values($1,$2, $3)', [nome,email,hashedPassword]);
         res.status(201).send('Usuário Cadastrado');
 
