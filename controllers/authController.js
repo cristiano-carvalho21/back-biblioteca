@@ -14,8 +14,17 @@ export const handleRegister = async(req, res) => {
         if(!validator.isEmail(email) || !email.endsWith('@gmail.com')){
             return res.status(400).json({erro:'Email Inválido'});
         }
+        const [usuario, dominio] = email.split('@');
+
+        if(/\.com/i.test(usuario){
+            return res.status(400).json({erro:'Email com o nome mal informado'});
+        }
+        if(!/\d/.test(usuario)){
+            return res.status(400).json({erro:'O email deve conter pelo menos um número'});
+        }
         await pool.query('insert into usuarios(nome,email,senha) values($1,$2, $3)', [nome,email,hashedPassword]);
         res.status(201).send('Usuário Cadastrado');
+
     } catch (error) {
         res.status(500).json({erro:'Erro ao cadastrar', detalhe:error});
     }
