@@ -11,7 +11,7 @@ export const handleRegister = async(req, res) => {
     const hashedPassword = await bcrypt.hash(password,10);
    
     try {
-        if(!validator.isEmail(email)){
+        if(!validator.isEmail(email) || !email.endsWith('@gmail.com')){
             return res.status(400).json({erro:'Email Inválido'});
         }
         await pool.query('insert into usuarios(nome,email,senha) values($1,$2, $3)', [nome,email,hashedPassword]);
